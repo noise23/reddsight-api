@@ -1,6 +1,6 @@
 {
   "name": "reddsight-api",
-  "description": "An open-source Reddcoin blockchain API. The Reddsight API provides you with a convenient, powerful and simple way to query and broadcast data on the bitcoin network and build your own services with it.",
+  "description": "An open-source ClickCoin blockchain API. The Reddsight API provides you with a convenient, powerful and simple way to query and broadcast data on the bitcoin network and build your own services with it.",
   "version": "0.2.12",
   "author": {
     "name": "Larry Ren",
@@ -47,11 +47,11 @@
   "homepage": "https://github.com/noise23/reddsight-api",
   "license": "MIT",
   "keywords": [
-    "reddcoin",
-    "reddcore",
-    "reddsight",
-    "reddsight api",
-    "reddcoin api",
+    "clickcoin",
+    "clickcore",
+    "clicksight",
+    "clicksight api",
+    "clickcoin api",
     "insight",
     "insight api",
     "blockchain",

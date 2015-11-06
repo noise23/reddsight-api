@@ -56,9 +56,9 @@ var isWin = /^win/.test(process.platform);
 var isMac = /^darwin/.test(process.platform);
 var isLinux = /^linux/.test(process.platform);
 if (!dataDir) {
-  if (isWin) dataDir = '%APPDATA%\\Reddcoin\\';
-  if (isMac) dataDir = process.env.HOME + '/Library/Application Support/Reddcoin/';
-  if (isLinux) dataDir = process.env.HOME + '/.reddcoin/';
+  if (isWin) dataDir = '%APPDATA%\\ClickCoin\\';
+  if (isMac) dataDir = process.env.HOME + '/Library/Application Support/ClickCoin/';
+  if (isLinux) dataDir = process.env.HOME + '/.ClickCoin/';
 }
 dataDir += network === 'testnet' ? 'testnet' : '';
 
@@ -68,8 +68,8 @@ var ignoreCache = process.env.INSIGHT_IGNORE_CACHE || 0;
 
 var bitcoindConf = {
   protocol: process.env.BITCOIND_PROTO || 'http',
-  user: process.env.BITCOIND_USER || 'user',
-  pass: process.env.BITCOIND_PASS || 'pass',
+  user: process.env.BITCOIND_USER || 'ClickCoinrpc',
+  pass: process.env.BITCOIND_PASS || 'xxx',
   host: process.env.BITCOIND_HOST || '127.0.0.1',
   port: process.env.BITCOIND_PORT || b_port,
   p2pPort: process.env.BITCOIND_P2P_PORT || p2p_port,

@@ -1,23 +1,23 @@
 # *Reddsight API*
 
-*Reddsight API* is an open-source Reddcoin blockchain REST
+*Reddsight API* is an open-source ClickCoin blockchain REST
 and websocket API. Reddsight API runs in NodeJS and uses LevelDB for storage. 
 
 This is a backend-only service. If you're looking for a web frontend application,
 take a look at our official blockchain explorer [Reddsight](https://github.com/reddcoin-project/reddsight).
 
-*Reddsight API* allows everyone to develop Reddcoin-related applications (such as wallets) that 
-require certain information from the blockchain that reddcoind does not provide.
+*Reddsight API* allows everyone to develop ClickCoin-related applications (such as wallets) that 
+require certain information from the blockchain that ClickCoind does not provide.
 
 
 ## Prerequisites
 
-* **reddcoind** - Download and install [Reddcoin](https://github.com/reddcoin-project/reddcoin).
+* **ClickCoind** - Download and install [ClickCoin](https://github.com/noise23/ClickCoin).
 
-*Reddsight API* needs a *trusted* reddcoind node to run. *Reddsight API* will connect to the node
-through the RPC API, Reddcoin peer-to-peer protocol, and will even read its raw block .dat files for syncing.
+*Reddsight API* needs a *trusted* ClickCoind node to run. *Reddsight API* will connect to the node
+through the RPC API, ClickCoin peer-to-peer protocol, and will even read its raw block .dat files for syncing.
 
-Configure reddcoind to listen to RPC calls and set `txindex` to true. reddcoind must be running and must have
+Configure ClickCoind to listen to RPC calls and set `txindex` to true. ClickCoind must be running and must have
 finished downloading the blockchain **before** running *Reddsight API*.
 
 * **Node.js v0.10.x** - Download and Install [Node.js](http://www.nodejs.org/download/).
@@ -56,13 +56,13 @@ There you can specify your application name and database name. Certain configura
 variables if they are defined:
 
 ```
-BITCOIND_HOST         # RPC reddcoind host
-BITCOIND_PORT         # RPC reddcoind Port
-BITCOIND_P2P_HOST     # P2P reddcoind Host (will default to BITCOIND_HOST, if specified)
-BITCOIND_P2P_PORT     # P2P reddcoind Port
+BITCOIND_HOST         # RPC ClickCoind host
+BITCOIND_PORT         # RPC ClickCoind Port
+BITCOIND_P2P_HOST     # P2P ClickCoind Host (will default to BITCOIND_HOST, if specified)
+BITCOIND_P2P_PORT     # P2P ClickCoind Port
 BITCOIND_USER         # RPC username
 BITCOIND_PASS         # RPC password
-BITCOIND_DATADIR      # reddcoind datadir. 'testnet' will be appended automatically if testnet is used. NEED to finish with '/'. e.g: `/vol/data/`
+BITCOIND_DATADIR      # ClickCoind datadir. 'testnet' will be appended automatically if testnet is used. NEED to finish with '/'. e.g: `/vol/data/`
 INSIGHT_NETWORK [= 'livenet' | 'testnet']
 INSIGHT_PORT          # insight api port
 INSIGHT_DB            # Path where to store the internal DB. (defaults to $HOME/.reddsight)
@@ -78,7 +78,7 @@ ENABLE_HTTPS # if "true" it will server using SSL/HTTPS
 
 ```
 
-Make sure that reddcoind is configured to [accept incoming connections using 'rpcallowip'](https://en.bitcoin.it/wiki/Running_Bitcoin).
+Make sure that ClickCoind is configured to [accept incoming connections using 'rpcallowip'](https://en.bitcoin.it/wiki/Running_Bitcoin).
 
 In case the network is changed (testnet to livenet or vice versa) levelDB database needs to be deleted. This can be performed running:
 ```util/sync.js -D``` and waiting for *Reddsight API* to synchronize again.  Once the database is deleted,
@@ -87,27 +87,27 @@ the sync.js process can be safely interrupted (CTRL+C) and continued from the sy
 
 ## Synchronization
 
-The initial synchronization process scans the blockchain from the paired reddcoind server to update addresses and balances.
-*reddsight-api* needs exactly one trusted reddcoind node to run. This node must have finished downloading the blockchain
+The initial synchronization process scans the blockchain from the paired ClickCoind server to update addresses and balances.
+*reddsight-api* needs exactly one trusted ClickCoind node to run. This node must have finished downloading the blockchain
 before running *reddsight-api*.
 
 While *reddsight-api* is synchronizing the website can be accessed (the sync process is embedded in the webserver),
 but there may be missing data or incorrect balances for addresses. The 'sync' status is shown at the `/api/sync` endpoint.
 
-The blockchain can be read from reddcoind's raw `.dat` files or RPC interface. 
+The blockchain can be read from ClickCoind's raw `.dat` files or RPC interface. 
 Reading the information from the `.dat` files is much faster so it's the
 recommended (and default) alternative. `.dat` files are scanned in the default
-location for each platform (for example, `~/.reddcoin` on Linux). In case a
+location for each platform (for example, `~/.ClickCoin` on Linux). In case a
 non-standard location is used, it needs to be defined (see the Configuration section).
 
 While synchronizing the blockchain, *reddsight-api* listens for new blocks and
-transactions relayed by the reddcoind node. Those are also stored on *reddsight-api*'s database.
+transactions relayed by the ClickCoind node. Those are also stored on *reddsight-api*'s database.
 In case *reddsight-api* is shutdown for a period of time, restarting it will trigger
 a partial (historic) synchronization of the blockchain. Depending on the size of
 that synchronization task, a reverse RPC or forward `.dat` syncing strategy will be used.
 
-If reddcoind is shutdown, *reddsight-api* needs to be stopped and restarted
-once reddcoind is restarted.
+If ClickCoind is shutdown, *reddsight-api* needs to be stopped and restarted
+once ClickCoind is restarted.
 
 
 ### Syncing old blockchain data manually
@@ -287,7 +287,7 @@ POST response:
   /api/peer
 ```
 
-### Status of the Reddcoin network
+### Status of the ClickCoin network
 ```
   /api/status?q=xxx
 ```
@@ -326,7 +326,7 @@ Sample output:
 }
 ```
 
-'<reddcoinAddress>': new transaction concerning <reddcoinAddress> received from network. This event is published in the '<reddcoinAddress>' room.
+'<clickcoinAddress>': new transaction concerning <clickcoinAddress> received from network. This event is published in the 'clickcoinAddress>' room.
 
 'status': every 1% increment on the sync task, this event will be triggered. This event is published in the 'sync' room.
 
